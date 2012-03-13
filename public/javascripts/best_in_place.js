@@ -251,7 +251,7 @@ BestInPlaceEditor.prototype = {
 // If no buttons, then blur saves, ESC cancels
 // If just Cancel button, then blur saves, ESC or clicking Cancel cancels (careful of blur event!)
 // If just OK button, then clicking OK saves (careful of blur event!), ESC or blur cancels
-// If both buttons, then clicking OK saves, ESC or clicking Cancel or blur cancels
+// If both buttons, then clicking OK saves, ESC or clicking Cancel cancels (blur event ignored)
 BestInPlaceEditor.forms = {
   "input" : {
     activateForm : function() {
@@ -295,7 +295,9 @@ BestInPlaceEditor.forms = {
 
     // When buttons are present, use a timer on the blur event to give precedence to clicks
     inputBlurHandler : function(event) {
-      if (event.data.editor.okButton) {
+      if (event.data.editor.okButton && event.data.editor.cancelButton) {
+        return;
+      } else if (event.data.editor.okButton) {
         event.data.editor.blurTimer = setTimeout(function () {
           if (!event.data.editor.userClicked) {
             event.data.editor.abort();
@@ -465,9 +467,11 @@ BestInPlaceEditor.forms = {
       return this.sanitizeValue(this.element.find("textarea").val());
     },
 
-    // When buttons are present, use a timer on the blur event to give precedence to clicks
+    // When a buttons are present, use a timer on the blur event to give precedence to clicks
     blurHandler : function(event) {
-      if (event.data.editor.okButton) {
+      if (event.data.editor.okButton && event.data.editor.cancelButton) {
+        return;
+      } else if (event.data.editor.okButton) {
         event.data.editor.blurTimer = setTimeout(function () {
           if (!event.data.editor.userClicked) {
             event.data.editor.abortIfConfirm();
