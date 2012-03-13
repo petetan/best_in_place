@@ -110,6 +110,8 @@ BestInPlaceEditor.prototype = {
       self.activator     = self.activator     || jQuery(this).attr("data-activator");
       self.okButton      = self.okButton      || jQuery(this).attr("data-ok-button");
       self.cancelButton  = self.cancelButton  || jQuery(this).attr("data-cancel-button");
+      self.okButtonClass      = self.okButtonClass      || jQuery(this).attr("data-ok-button-class");
+      self.cancelButtonClass  = self.cancelButtonClass  || jQuery(this).attr("data-cancel-button-class");
       self.nil           = self.nil           || jQuery(this).attr("data-nil");
       self.inner_class   = self.inner_class   || jQuery(this).attr("data-inner-class");
       self.html_attrs    = self.html_attrs    || jQuery(this).attr("data-html-attrs");
@@ -133,6 +135,8 @@ BestInPlaceEditor.prototype = {
     self.activator     = self.element.attr("data-activator")     || self.element;
     self.okButton      = self.element.attr("data-ok-button")     || self.okButton;
     self.cancelButton  = self.element.attr("data-cancel-button") || self.cancelButton;
+    self.okButtonClass      = self.element.attr("data-ok-button-class")     || self.okButtonClass;
+    self.cancelButtonClass  = self.element.attr("data-cancel-button-class") || self.cancelButtonClass;
     self.nil           = self.element.attr("data-nil")           || self.nil      || "-";
     self.inner_class   = self.element.attr("data-inner-class")   || self.inner_class   || null;
     self.html_attrs    = self.element.attr("data-html-attrs")    || self.html_attrs;
@@ -258,10 +262,18 @@ BestInPlaceEditor.forms = {
       }
       output += '>';
       if (this.okButton) {
-        output += '<input type="submit" value="' + this.okButton + '" />'
+        input_class = '';
+        if (this.okButtonClass) {
+          input_class = 'class="' + this.okButtonClass + '"';
+        }
+        output += '<input type="submit" value="' + this.okButton + '" ' + input_class + ' />'
       }
       if (this.cancelButton) {
-        output += '<input type="button" value="' + this.cancelButton + '" />'
+        input_class = '';
+        if (this.cancelButtonClass) {
+          input_class = 'class="' + this.cancelButtonClass + '"';
+        }
+        output += '<input type="button" value="' + this.cancelButton + '" ' + input_class + ' />'
       }
       output += '</form>';
       this.element.html(output);
@@ -417,10 +429,18 @@ BestInPlaceEditor.forms = {
       output += this.sanitizeValue(this.display_value);
       output += '</textarea>';
       if (this.okButton) {
-        output += '<input type="submit" value="' + this.okButton + '" />'
+        input_class = '';
+        if (this.okButtonClass) {
+          input_class = 'class="' + this.okButtonClass + '"';
+        }
+        output += '<input type="submit" value="' + this.okButton + '" ' + input_class + ' />'
       }
       if (this.cancelButton) {
-        output += '<input type="button" value="' + this.cancelButton + '" />'
+        input_class = '';
+        if (this.cancelButtonClass) {
+          input_class = 'class="' + this.cancelButtonClass + '"';
+        }
+        output += '<input type="button" value="' + this.cancelButton + '" ' + input_class + ' />'
       }
       output += '</form>';
       this.element.html(output);
