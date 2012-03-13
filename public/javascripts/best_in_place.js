@@ -363,7 +363,7 @@ BestInPlaceEditor.forms = {
 
   "select" : {
     activateForm : function() {
-      var output = "<form action='javascript:void(0)' style='display:inline;'><select>";
+      var output = '<form class="form_in_place" action="javascript:void(0)" style="display:inline;"><select>';
       var selected = "";
       var oldValue = this.oldValue;
       $.each(this.values, function(index, value) {
@@ -413,7 +413,7 @@ BestInPlaceEditor.forms = {
       height = this.element.css('height');
 
       // construct the form
-      var output = '<form action="javascript:void(0)" style="display:inline;"><textarea>';
+      var output = '<form class="form_in_place" action="javascript:void(0)" style="display:inline;"><textarea>';
       output += this.sanitizeValue(this.display_value);
       output += '</textarea>';
       if (this.okButton) {
