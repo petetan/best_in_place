@@ -42,6 +42,7 @@ module BestInPlace
       out << " data-ok-button-class='#{opts[:ok_button_class]}'" unless opts[:ok_button_class].blank?
       out << " data-cancel-button-class='#{opts[:cancel_button_class]}'" unless opts[:cancel_button_class].blank?
       out << " data-nil='#{opts[:nil]}'" unless opts[:nil].blank?
+      out << " data-use-confirm='#{opts[:use_confirm]}'" unless opts[:use_confirm].nil?
       out << " data-type='#{opts[:type]}'"
       out << " data-inner-class='#{opts[:inner_class]}'" if opts[:inner_class]
       out << " data-html-attrs='#{opts[:html_attrs].to_json}'" unless opts[:html_attrs].blank?
