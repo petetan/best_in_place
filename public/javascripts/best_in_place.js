@@ -499,7 +499,11 @@ BestInPlaceEditor.forms = {
 
 BestInPlaceEditor.helpers = {
   buttonRenderer : function(element) {
-    output = '';
+    if (!element.okButton && !element.cancelButton) {
+      return '';
+    }
+
+    output = '<div class="buttons_in_place">';
     if (element.okButton) {
       input_class = '';
       if (element.okButtonClass) {
@@ -514,6 +518,7 @@ BestInPlaceEditor.helpers = {
       }
       output += '<input type="button" value="' + element.cancelButton + '" ' + input_class + ' />'
     }
+    output += '</div>';
     return output;
   }
 }
