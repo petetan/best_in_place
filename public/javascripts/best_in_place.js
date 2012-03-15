@@ -443,6 +443,9 @@ BestInPlaceEditor.forms = {
       jQuery(this.element.find("textarea")[0]).css({ 'min-height': height });
       jQuery(this.element.find("textarea")[0]).elastic();
 
+      // Workaround for FF issue, when textarea is not correctly resized and buttons cannot be clicked
+      jQuery(this.element.find("textarea")[0]).trigger('blur');
+
       this.element.find("textarea")[0].focus();
       this.element.find("form").bind('submit', {editor: this}, BestInPlaceEditor.forms.textarea.submitHandler);
       if (this.cancelButton) {
