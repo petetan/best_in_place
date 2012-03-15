@@ -510,6 +510,19 @@ BestInPlaceEditor.helpers = {
     }
 
     output = '<div class="buttons_in_place">';
+    if (element.switchButtonOrder) {
+      output += BestInPlaceEditor.helpers.cancelButtonRenderer(element);
+      output += BestInPlaceEditor.helpers.okButtonRenderer(element);
+    } else {
+      output += BestInPlaceEditor.helpers.okButtonRenderer(element);
+      output += BestInPlaceEditor.helpers.cancelButtonRenderer(element);
+    }
+    output += '</div>';
+    return output;
+  },
+
+  okButtonRenderer : function(element) {
+    output = '';
     if (element.okButton) {
       input_class = '';
       if (element.okButtonClass) {
@@ -517,6 +530,11 @@ BestInPlaceEditor.helpers = {
       }
       output += '<input type="submit" value="' + element.okButton + '" ' + input_class + ' />'
     }
+    return output;
+  },
+
+  cancelButtonRenderer : function(element) {
+    output = '';
     if (element.cancelButton) {
       input_class = '';
       if (element.cancelButtonClass) {
@@ -524,7 +542,6 @@ BestInPlaceEditor.helpers = {
       }
       output += '<input type="button" value="' + element.cancelButton + '" ' + input_class + ' />'
     }
-    output += '</div>';
     return output;
   }
 }
