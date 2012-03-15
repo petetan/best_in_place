@@ -459,8 +459,8 @@ BestInPlaceEditor.forms = {
       this.element.html(output);
       this.setHtmlAttributes();
 
-      // set width and height of textarea
-      jQuery(this.element.find("textarea")[0]).css({ 'min-width': width, 'min-height': height });
+      // set min-height of textarea
+      jQuery(this.element.find("textarea")[0]).css({ 'min-height': height });
       jQuery(this.element.find("textarea")[0]).elastic();
 
       this.element.find("textarea")[0].focus();
