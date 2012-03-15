@@ -160,6 +160,12 @@ BestInPlaceEditor.prototype = {
       self.useConfirm = (self.element.attr("data-use-confirm") != "false");
     }
 
+    if (!self.element.attr("data-switch-button-order")) {
+      self.switchButtonOrder = false;
+    } else {
+      self.switchButtonOrder = (self.element.attr("data-switch-button-order") == "true");
+    }
+
     if ((self.formType == "select" || self.formType == "checkbox") && self.collection !== null)
     {
       self.values = jQuery.parseJSON(self.collection);
