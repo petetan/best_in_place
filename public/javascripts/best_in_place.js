@@ -272,20 +272,7 @@ BestInPlaceEditor.forms = {
         output += ' class="' + this.inner_class + '"';
       }
       output += '>';
-      if (this.okButton) {
-        input_class = '';
-        if (this.okButtonClass) {
-          input_class = 'class="' + this.okButtonClass + '"';
-        }
-        output += '<input type="submit" value="' + this.okButton + '" ' + input_class + ' />'
-      }
-      if (this.cancelButton) {
-        input_class = '';
-        if (this.cancelButtonClass) {
-          input_class = 'class="' + this.cancelButtonClass + '"';
-        }
-        output += '<input type="button" value="' + this.cancelButton + '" ' + input_class + ' />'
-      }
+      output += BestInPlaceEditor.helpers.buttonRenderer(this);
       output += '</form>';
       this.element.html(output);
       this.setHtmlAttributes();
@@ -441,20 +428,7 @@ BestInPlaceEditor.forms = {
       var output = '<form class="form_in_place" action="javascript:void(0)" style="display:inline;"><textarea>';
       output += this.sanitizeValue(this.display_value);
       output += '</textarea>';
-      if (this.okButton) {
-        input_class = '';
-        if (this.okButtonClass) {
-          input_class = 'class="' + this.okButtonClass + '"';
-        }
-        output += '<input type="submit" value="' + this.okButton + '" ' + input_class + ' />'
-      }
-      if (this.cancelButton) {
-        input_class = '';
-        if (this.cancelButtonClass) {
-          input_class = 'class="' + this.cancelButtonClass + '"';
-        }
-        output += '<input type="button" value="' + this.cancelButton + '" ' + input_class + ' />'
-      }
+      output += BestInPlaceEditor.helpers.buttonRenderer(this);
       output += '</form>';
       this.element.html(output);
       this.setHtmlAttributes();
@@ -521,6 +495,28 @@ BestInPlaceEditor.forms = {
     }
   }
 };
+
+
+BestInPlaceEditor.helpers = {
+  buttonRenderer : function(element) {
+    output = '';
+    if (element.okButton) {
+      input_class = '';
+      if (element.okButtonClass) {
+        input_class = 'class="' + element.okButtonClass + '"';
+      }
+      output += '<input type="submit" value="' + element.okButton + '" ' + input_class + ' />'
+    }
+    if (element.cancelButton) {
+      input_class = '';
+      if (element.cancelButtonClass) {
+        input_class = 'class="' + element.cancelButtonClass + '"';
+      }
+      output += '<input type="button" value="' + element.cancelButton + '" ' + input_class + ' />'
+    }
+    return output;
+  }
+}
 
 jQuery.fn.best_in_place = function() {
   this.each(function(){
