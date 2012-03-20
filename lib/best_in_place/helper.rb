@@ -30,6 +30,7 @@ module BestInPlace
         value = fieldValue ? opts[:collection][1] : opts[:collection][0]
         collection = opts[:collection].to_json
       end
+
       out = "<span class='best_in_place'"
       out << " id='#{BestInPlace::Utils.build_best_in_place_id(object, field)}'"
       out << " data-url='#{opts[:path].blank? ? url_for(object) : url_for(opts[:path])}'"
@@ -48,6 +49,7 @@ module BestInPlace
       out << " data-inner-class='#{opts[:inner_class]}'" if opts[:inner_class]
       out << " data-html-attrs='#{opts[:html_attrs].to_json}'" unless opts[:html_attrs].blank?
       out << " data-original-content='#{attribute_escape(object.send(field))}'" if opts[:display_as] || opts[:display_with]
+      out << options_to_attributes(opts[:outer_html_attrs]) unless opts[:outer_html_attrs].blank?
       if !opts[:sanitize].nil? && !opts[:sanitize]
         out << " data-sanitize='false'>"
         out << sanitize(value, :tags => %w(b i u s a strong em p h1 h2 h3 h4 h5 ul li ol hr pre span img br), :attributes => %w(id class href))
@@ -55,6 +57,7 @@ module BestInPlace
         out << ">#{sanitize(value, :tags => nil, :attributes => nil)}"
       end
       out << "</span>"
+
       raw out
     end
 
@@ -91,5 +94,15 @@ module BestInPlace
     def attribute_escape(data)
       data.to_s.gsub("&", "&amp;").gsub("'", "&apos;") unless data.nil?
     end
+
+    def options_to_attributes(html_attrs)
+      out = ''
+      html_attrs.each_pair do |attr_name, attr_value|
+        out << " #{attr_name.to_s}='#{attr_value.to_s}'" if attr_value.present?
+      end
+
+      out
+    end
+
   end
 end
