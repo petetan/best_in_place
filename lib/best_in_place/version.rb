@@ -1,3 +1,3 @@
 module BestInPlace
-  VERSION = "0.2.4.fork"
+  VERSION = "0.2.4.infopark"
 end
