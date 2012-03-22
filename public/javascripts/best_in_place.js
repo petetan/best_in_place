@@ -245,6 +245,7 @@ BestInPlaceEditor.prototype = {
       var container = $("<span class='flash-error'></span>").html(value);
       container.purr();
     });
+    this.element.trigger($.Event("ajax:error"), request.responseText);
 
     // Binding back after being clicked
     $(this.activator).bind('click', {editor: this}, this.clickHandler);
