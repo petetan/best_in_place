@@ -225,7 +225,10 @@ BestInPlaceEditor.prototype = {
 
   loadSuccessCallback : function(data) {
     var response = $.parseJSON($.trim(data));
-    if (response != null && response.hasOwnProperty("display_as")) {
+    if (response != null) {
+      if (response.hasOwnProperty("display_as")) {
+        this.element.html(response["display_as"]);
+      }
       if (response.hasOwnProperty(this.attributeName)) {
         this.element.attr("data-original-content", response[this.attributeName]);
         this.original_content = response[this.attributeName];
@@ -233,7 +236,6 @@ BestInPlaceEditor.prototype = {
         this.element.attr("data-original-content", this.element.html());
         this.original_content = this.element.html();
       }
-      this.element.html(response["display_as"]);
     }
     this.element.trigger($.Event("ajax:success"), data);
 
